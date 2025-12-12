@@ -1,0 +1,36 @@
+{
+  "population_by_state": {
+    "Maharashtra": 123144223,
+    "Uttar Pradesh": 237882725,
+    "Bihar": 130725316,
+    "West Bengal": 99609303,
+    "Madhya Pradesh": 85358965,
+    "Tamil Nadu": 77841267,
+    "Rajasthan": 81032689,
+    "Karnataka": 67562686,
+    "Gujarat": 70400153,
+    "Andhra Pradesh": 53903393
+  },
+  "urban_rural_split": {
+    "urban": 0.35,
+    "rural": 0.65
+  },
+  "income_distribution": {
+    "Deprived": 0.15,
+    "Aspirers": 0.45,
+    "Middle Class": 0.28,
+    "Affluent": 0.09,
+    "Elite": 0.03
+  },
+  "education_levels": {
+    "primary_or_less": 0.30,
+    "secondary": 0.45,
+    "graduate": 0.15,
+    "post_graduate": 0.10
+  },
+  "internet_penetration": {
+    "overall": 0.52,
+    "urban": 0.71,
+    "rural": 0.38
+  }
+}

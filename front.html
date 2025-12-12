@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Idea Simulation Engine Finder</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e66b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "card-dark": "#1a2c22",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f3528 1px, transparent 1px), linear-gradient(to bottom, #1f3528 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }.industry-card {
+            transition: all 0.3s ease;
+        }
+        .industry-card:hover {
+            box-shadow: 0 0 15px rgba(25, 230, 107, 0.2);
+            transform: translateY(-2px);
+        }
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, 10%, black, 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, 5%, black, 95%, transparent);
+        }
+    </style>
+</head>
+<body class="font-display antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-background-dark">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<div class="absolute inset-0 z-0 pointer-events-none">
+<div class="absolute inset-0 bg-grid-pattern opacity-[0.15]"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 blur-[100px] rounded-full mix-blend-screen pointer-events-none"></div>
+<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none"></div>
+</div>
+<div class="layout-container flex h-full grow flex-col relative z-10">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#244732] px-6 lg:px-10 py-4 backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">hub</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Idea Simulation Engine</h2>
+</div>
+<div class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</header>
+<main class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-10">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 w-full gap-12">
+<div class="flex flex-col items-center justify-center gap-6 text-center pt-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            AI Powered v2.0
+                        </div>
+<h1 class="text-4xl md:text-6xl font-black leading-tight tracking-[-0.033em] bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-slate-400">
+                            Simulate Your Business<br/>Idea in 60 Seconds
+                        </h1>
+<p class="text-slate-500 dark:text-[#93c8a8] text-lg md:text-xl font-normal leading-normal max-w-2xl">
+                            Advanced AI modeling for market validation, revenue projection, and risk analysis before you write a single line of code.
+                        </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 p-2">
+<button class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-blue-500/50 hover:bg-blue-500/5 dark:hover:bg-blue-900/10 text-left transition-all w-full">
+<div class="flex items-center justify-center w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]">laptop_mac</span>
+</div>
+<div class="flex flex-col items-center md:items-start">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-blue-500 transition-colors">Tech &amp; SaaS</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">Software, Apps, Platforms</p>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
+<span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</button>
+<button class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-green-500/50 hover:bg-green-500/5 dark:hover:bg-green-900/10 text-left transition-all w-full">
+<div class="flex items-center justify-center w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]">shopping_bag</span>
+</div>
+<div class="flex flex-col items-center md:items-start">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-green-500 transition-colors">E-commerce &amp; Retail</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">DTC, Marketplaces, Shops</p>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-green-500">
+<span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</button>
+<button class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-teal-500/50 hover:bg-teal-500/5 dark:hover:bg-teal-900/10 text-left transition-all w-full">
+<div class="flex items-center justify-center w-14 h-14 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]">cardiology</span>
+</div>
+<div class="flex flex-col items-center md:items-start">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-teal-500 transition-colors">Health &amp; Wellness</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">MedTech, Fitness, Care</p>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-teal-500">
+<span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</button>
+<button class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-orange-500/50 hover:bg-orange-500/5 dark:hover:bg-orange-900/10 text-left transition-all w-full">
+<div class="flex items-center justify-center w-14 h-14 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]">restaurant</span>
+</div>
+<div class="flex flex-col items-center md:items-start">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-orange-500 transition-colors">Food &amp; Hospitality</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">Restaurants, Travel, Events</p>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500">
+<span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</button>
+</div>
+<div class="@container w-full">
+<div class="flex flex-col gap-6 items-center">
+<label class="text-slate-500 dark:text-[#93c8a8] text-lg font-medium" for="idea-input">Or, type your own idea below</label>
+<div class="relative w-full max-w-[720px] group/input">
+<div class="absolute -inset-1 rounded-full bg-gradient-to-r from-primary/30 to-blue-500/30 blur opacity-25 group-focus-within/input:opacity-75 transition duration-500"></div>
+<div class="relative flex w-full items-center rounded-full bg-white dark:bg-[#1a2c22] border border-slate-200 dark:border-[#346548] p-2 shadow-xl">
+<div class="pl-4 text-slate-400 dark:text-[#5e8c72]">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#5e8c72] text-lg px-4 py-3" id="idea-input" placeholder="e.g., An Uber for dog walking in NYC..." type="text"/>
+<button class="hidden sm:flex items-center gap-2 bg-primary hover:bg-[#14d660] text-background-dark font-bold rounded-full px-8 py-3 transition-all hover:shadow-[0_0_20px_rgba(25,230,107,0.4)]">
+<span>Simulate</span>
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</button>
+<button class="flex sm:hidden items-center justify-center bg-primary text-background-dark font-bold rounded-full p-3">
+<span class="material-symbols-outlined">bolt</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4 pb-20">
+<h3 class="text-slate-400 dark:text-slate-500 text-sm font-semibold uppercase tracking-wider">Pick a starting idea</h3>
+<div class="flex flex-wrap justify-center gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 dark:border-[#346548] bg-white dark:bg-[#1a2c22]/50 hover:bg-slate-50 dark:hover:bg-[#244732] text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px] text-blue-400">psychology</span>
+                                AI Resume Screener
+                            </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 dark:border-[#346548] bg-white dark:bg-[#1a2c22]/50 hover:bg-slate-50 dark:hover:bg-[#244732] text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px] text-green-400">payments</span>
+                                Freelancer Payment Platform
+                            </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 dark:border-[#346548] bg-white dark:bg-[#1a2c22]/50 hover:bg-slate-50 dark:hover:bg-[#244732] text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px] text-teal-400">fitness_center</span>
+                                VR Fitness App
+                            </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 dark:border-[#346548] bg-white dark:bg-[#1a2c22]/50 hover:bg-slate-50 dark:hover:bg-[#244732] text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px] text-orange-400">soup_kitchen</span>
+                                Meal Prep Subscription
+                            </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

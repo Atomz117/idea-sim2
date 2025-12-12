@@ -1,0 +1,197 @@
+[
+    {
+        "id": "p001",
+        "name": "Aarav (Aspiring Student)",
+        "age_range": "18-24",
+        "income_level": "Aspirers",
+        "digital_literacy": 90,
+        "friction_tolerance": 40,
+        "goals": [
+            "Career Growth",
+            "Affordable Education"
+        ],
+        "type": "Early Adopter"
+    },
+    {
+        "id": "p002",
+        "name": "Priya (Corporate Employee)",
+        "age_range": "25-34",
+        "income_level": "Middle Class",
+        "digital_literacy": 85,
+        "friction_tolerance": 30,
+        "goals": [
+            "Work-Life Balance",
+            "Convenience"
+        ],
+        "type": "Primary User"
+    },
+    {
+        "id": "p003",
+        "name": "Ramesh (Small Shop Owner)",
+        "age_range": "35-50",
+        "income_level": "Middle Class",
+        "digital_literacy": 50,
+        "friction_tolerance": 70,
+        "goals": [
+            "Business Growth",
+            "Cost Saving"
+        ],
+        "type": "Economic Buyer"
+    },
+    {
+        "id": "p004",
+        "name": "Sita (Homemaker)",
+        "age_range": "30-50",
+        "income_level": "Middle Class",
+        "digital_literacy": 45,
+        "friction_tolerance": 50,
+        "goals": [
+            "Family Health",
+            "Savings"
+        ],
+        "type": "Primary User"
+    },
+    {
+        "id": "p005",
+        "name": "Vikram (Tech Entrepreneur)",
+        "age_range": "28-40",
+        "income_level": "Affluent",
+        "digital_literacy": 99,
+        "friction_tolerance": 20,
+        "goals": [
+            "Efficiency",
+            "Networking"
+        ],
+        "type": "Early Adopter"
+    },
+    {
+        "id": "p006",
+        "name": "Ananya (Freelance Designer)",
+        "age_range": "22-30",
+        "income_level": "Aspirers",
+        "digital_literacy": 95,
+        "friction_tolerance": 35,
+        "goals": [
+            "Stable Income",
+            "Creative Freedom"
+        ],
+        "type": "Primary User"
+    },
+    {
+        "id": "p007",
+        "name": "Rajesh (Factory Worker)",
+        "age_range": "25-45",
+        "income_level": "Deprived",
+        "digital_literacy": 40,
+        "friction_tolerance": 60,
+        "goals": [
+            "Basic Needs",
+            "Job Security"
+        ],
+        "type": "Primary User"
+    },
+    {
+        "id": "p008",
+        "name": "Meera (Rural Artisan)",
+        "age_range": "30-55",
+        "income_level": "Deprived",
+        "digital_literacy": 30,
+        "friction_tolerance": 80,
+        "goals": [
+            "Market Access",
+            "Fair Price"
+        ],
+        "type": "Primary User"
+    },
+    {
+        "id": "p009",
+        "name": "Suresh (Retired Gov Official)",
+        "age_range": "60+",
+        "income_level": "Middle Class",
+        "digital_literacy": 55,
+        "friction_tolerance": 25,
+        "goals": [
+            "Health Security",
+            "Peace of Mind"
+        ],
+        "type": "Economic Buyer"
+    },
+    {
+        "id": "p010",
+        "name": "Kavita (Social Media Influencer)",
+        "age_range": "18-28",
+        "income_level": "Affluent",
+        "digital_literacy": 98,
+        "friction_tolerance": 15,
+        "goals": [
+            "Fame",
+            "Engagement"
+        ],
+        "type": "Early Adopter"
+    },
+    {
+        "id": "p011",
+        "name": "Arjun (Gig Worker)",
+        "age_range": "20-35",
+        "income_level": "Aspirers",
+        "digital_literacy": 75,
+        "friction_tolerance": 55,
+        "goals": [
+            "Daily Earnings",
+            "Flexibility"
+        ],
+        "type": "Primary User"
+    },
+    {
+        "id": "p012",
+        "name": "Deepa (Doctor)",
+        "age_range": "35-50",
+        "income_level": "Elite",
+        "digital_literacy": 80,
+        "friction_tolerance": 10,
+        "goals": [
+            "Patient Care",
+            "Time Management"
+        ],
+        "type": "Economic Buyer"
+    },
+    {
+        "id": "p013",
+        "name": "Rahul (Farmer)",
+        "age_range": "40-60",
+        "income_level": "Aspirers",
+        "digital_literacy": 35,
+        "friction_tolerance": 90,
+        "goals": [
+            "Crop Yield",
+            "Loan Access"
+        ],
+        "type": "Economic Buyer"
+    },
+    {
+        "id": "p014",
+        "name": "Neha (Startup HR)",
+        "age_range": "26-35",
+        "income_level": "Middle Class",
+        "digital_literacy": 90,
+        "friction_tolerance": 25,
+        "goals": [
+            "Talent Acquisition",
+            "Culture"
+        ],
+        "type": "Economic Buyer"
+    },
+    {
+        "id": "p015",
+        "name": "Amit (Real Estate Broker)",
+        "age_range": "30-50",
+        "income_level": "Affluent",
+        "digital_literacy": 70,
+        "friction_tolerance": 45,
+        "goals": [
+            "Leads",
+            "Commissions"
+        ],
+        "type": "Economic Buyer"
+    }
+]

@@ -1,0 +1,6 @@
+flask
+spacy
+numpy
+pandas
+reportlab
+gunicorn

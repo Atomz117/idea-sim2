@@ -1,0 +1,79 @@
+{
+    "cities": {
+        "Mumbai": {
+            "logistics": 95,
+            "digital_payments": 98,
+            "regulatory": 70
+        },
+        "Delhi NCR": {
+            "logistics": 92,
+            "digital_payments": 96,
+            "regulatory": 65
+        },
+        "Bangalore": {
+            "logistics": 90,
+            "digital_payments": 99,
+            "regulatory": 80
+        },
+        "Hyderabad": {
+            "logistics": 88,
+            "digital_payments": 95,
+            "regulatory": 82
+        },
+        "Chennai": {
+            "logistics": 91,
+            "digital_payments": 90,
+            "regulatory": 78
+        },
+        "Pune": {
+            "logistics": 85,
+            "digital_payments": 94,
+            "regulatory": 75
+        },
+        "Kolkata": {
+            "logistics": 80,
+            "digital_payments": 85,
+            "regulatory": 60
+        },
+        "Ahmedabad": {
+            "logistics": 89,
+            "digital_payments": 90,
+            "regulatory": 85
+        },
+        "Jaipur": {
+            "logistics": 75,
+            "digital_payments": 82,
+            "regulatory": 72
+        },
+        "Chandigarh": {
+            "logistics": 82,
+            "digital_payments": 92,
+            "regulatory": 88
+        },
+        "Lucknow": {
+            "logistics": 70,
+            "digital_payments": 75,
+            "regulatory": 65
+        },
+        "Indore": {
+            "logistics": 78,
+            "digital_payments": 80,
+            "regulatory": 76
+        },
+        "Patna": {
+            "logistics": 60,
+            "digital_payments": 65,
+            "regulatory": 55
+        },
+        "Bhopal": {
+            "logistics": 68,
+            "digital_payments": 72,
+            "regulatory": 68
+        },
+        "Kochi": {
+            "logistics": 84,
+            "digital_payments": 88,
+            "regulatory": 80
+        }
+    }
+}

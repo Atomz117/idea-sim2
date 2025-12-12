@@ -1,0 +1,124 @@
+{
+    "benchmarks": {
+        "EdTech": {
+            "cac": 4500,
+            "conversion_rate": 0.02,
+            "aov": 15000,
+            "competition": 85
+        },
+        "FinTech": {
+            "cac": 1200,
+            "conversion_rate": 0.04,
+            "aov": 500,
+            "competition": 90
+        },
+        "HealthTech": {
+            "cac": 3000,
+            "conversion_rate": 0.03,
+            "aov": 2500,
+            "competition": 65
+        },
+        "E-commerce Fashion": {
+            "cac": 800,
+            "conversion_rate": 0.025,
+            "aov": 1800,
+            "competition": 95
+        },
+        "E-commerce Electronics": {
+            "cac": 1500,
+            "conversion_rate": 0.015,
+            "aov": 12000,
+            "competition": 88
+        },
+        "Food Delivery": {
+            "cac": 600,
+            "conversion_rate": 0.12,
+            "aov": 450,
+            "competition": 92
+        },
+        "SaaS B2B": {
+            "cac": 15000,
+            "conversion_rate": 0.01,
+            "aov": 60000,
+            "competition": 70
+        },
+        "Social Media": {
+            "cac": 150,
+            "conversion_rate": 0.25,
+            "aov": 0,
+            "competition": 98
+        },
+        "Logistics": {
+            "cac": 2500,
+            "conversion_rate": 0.05,
+            "aov": 8000,
+            "competition": 60
+        },
+        "AgriTech": {
+            "cac": 2000,
+            "conversion_rate": 0.03,
+            "aov": 5000,
+            "competition": 45
+        },
+        "Real Estate Tech": {
+            "cac": 8000,
+            "conversion_rate": 0.005,
+            "aov": 5000000,
+            "competition": 75
+        },
+        "Travel & Hospitality": {
+            "cac": 1800,
+            "conversion_rate": 0.02,
+            "aov": 12000,
+            "competition": 82
+        },
+        "Gaming": {
+            "cac": 200,
+            "conversion_rate": 0.08,
+            "aov": 500,
+            "competition": 86
+        },
+        "D2C Beauty": {
+            "cac": 900,
+            "conversion_rate": 0.03,
+            "aov": 1200,
+            "competition": 91
+        },
+        "Gig Economy": {
+            "cac": 500,
+            "conversion_rate": 0.06,
+            "aov": 300,
+            "competition": 80
+        },
+        "CleanTech": {
+            "cac": 6000,
+            "conversion_rate": 0.02,
+            "aov": 45000,
+            "competition": 50
+        },
+        "LegalTech": {
+            "cac": 4000,
+            "conversion_rate": 0.015,
+            "aov": 10000,
+            "competition": 40
+        },
+        "HRTech": {
+            "cac": 3500,
+            "conversion_rate": 0.02,
+            "aov": 25000,
+            "competition": 72
+        },
+        "Cybersecurity": {
+            "cac": 5000,
+            "conversion_rate": 0.01,
+            "aov": 80000,
+            "competition": 65
+        },
+        "Event Tech": {
+            "cac": 2200,
+            "conversion_rate": 0.03,
+            "aov": 15000,
+            "competition": 55
+        }
+    }
+}

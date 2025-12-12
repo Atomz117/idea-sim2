@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Idea Simulation Engine</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e66b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "card-dark": "#1a2c22",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f3528 1px, transparent 1px), linear-gradient(to bottom, #1f3528 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .industry-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .industry-card:hover {
+            box-shadow: 0 0 15px rgba(25, 230, 107, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, 10%, black, 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, 5%, black, 95%, transparent);
+        }
+
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #19e66b;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- NEW USER CSS --- */
+        .severity-container {
+            width: 100%;
+            max-width: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .severity-bar {
+            width: calc(var(--severity-percentage) * 1%);
+            max-width: 100%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Blocker Card */
+        .blocker-card {
+            background: rgba(59, 7, 7, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .blocker-type {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .blocker-description {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .severity-display {
+            margin-bottom: 20px;
+        }
+
+        .severity-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .severity-score {
+            font-weight: bold;
+            color: white;
+        }
+
+        .severity-track {
+            width: 100%;
+            background: #334155;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .severity-fill {
+            background: #ef4444;
+            border-radius: 10px;
+            height: 100%;
+            transition: width 1s ease-out;
+            max-width: 100%;
+        }
+
+        .severity-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .impact-metrics {
+            display: flex;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        .impact-item {
+            flex: 1;
+        }
+
+        .metric-label {
+            display: block;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Environmental Factors */
+        .factors-dashboard {
+            width: 100%;
+            margin: 20px 0;
+            background: #1a2c22;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .factor-item {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .factor-name {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .factor-score {
+            font-weight: bold;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .factor-bar {
+            width: 100%;
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .factor-fill {
+            height: 100%;
+            background: #19e66b;
+            transition: width 1s ease;
+            max-width: 100%;
+        }
+
+        /* Competitor Map CSS */
+        .comp-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .comp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .comp-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .comp-name {
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .weakness-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+        }
+
+        .weakness-track {
+            width: 60px;
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .weakness-val {
+            height: 100%;
+            background: #fbbf24;
+        }
+
+        /* Amber for weakness */
+
+        .strategy-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .strategy-box {
+            background: rgba(25, 230, 107, 0.1);
+            border: 1px solid rgba(25, 230, 107, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .strategy-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #19e66b;
+            margin-bottom: 5px;
+        }
+
+        .strategy-val {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .capture-gauge-container {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .capture-gauge-arc {
+            width: 100px;
+            height: 100px;
+            background: #334155;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .capture-gauge-fill {
+            width: 100px;
+            height: 100px;
+            background: #19e66b;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            transform-origin: center;
+            transform: rotate(0deg);
+            transition: transform 1s ease-out;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Table View */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #334155;
+        }
+
+        @media (max-width: 768px) {
+            .impact-metrics {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .scenarios {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="font-display antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-background-dark">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root">
+        <!-- Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 bg-grid-pattern opacity-[0.15]"></div>
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 blur-[100px] rounded-full mix-blend-screen pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none">
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="layout-container flex h-full grow flex-col relative z-10">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#244732] px-6 lg:px-10 py-4 backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 sticky top-0 z-50">
+                <div class="flex items-center gap-4">
+                    <div class="size-8 text-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[32px]">hub</span>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Idea
+                        Simulation Engine</h2>
+                </div>
+                <!-- Dynamic Header Content for Results -->
+                <div id="result-header-content" class="hidden flex items-center gap-4">
+                    <div class="flex flex-col items-end">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider">North Star Metric</span>
+                        <span id="header-north-star" class="text-primary font-bold"></span>
+                    </div>
+                    <div id="header-badge"
+                        class="px-2 py-1 bg-yellow-400/20 text-yellow-400 text-xs font-bold rounded border border-yellow-400/50">
+                        Level 5</div>
+                </div>
+            </header>
+
+            <main class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-10 relative">
+
+                <!-- LANDING VIEW -->
+                <div id="landing-view"
+                    class="layout-content-container flex flex-col max-w-[960px] flex-1 w-full gap-12 fade-in">
+                    <div class="flex flex-col items-center justify-center gap-6 text-center pt-8">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            AI Powered v2.0
+                        </div>
+                        <h1
+                            class="text-4xl md:text-6xl font-black leading-tight tracking-[-0.033em] bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-slate-400">
+                            Simulate Your Business<br />Idea in 60 Seconds
+                        </h1>
+                        <p
+                            class="text-slate-500 dark:text-[#93c8a8] text-lg md:text-xl font-normal leading-normal max-w-2xl">
+                            Advanced AI modeling for market validation, revenue projection, and risk analysis before you
+                            write a single line of code.
+                        </p>
+                    </div>
+
+                    <!-- Industry Selection -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 p-2">
+                        <button onclick="fetchIndustryIdeas('tech')"
+                            class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-blue-500/50 hover:bg-blue-500/5 dark:hover:bg-blue-900/10 text-left transition-all w-full">
+                            <div
+                                class="flex items-center justify-center w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-[28px]">laptop_mac</span>
+                            </div>
+                            <div class="flex flex-col items-center md:items-start">
+                                <h3
+                                    class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-blue-500 transition-colors">
+                                    Tech &amp; SaaS</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">Software, Apps,
+                                    Platforms</p>
+                            </div>
+                        </button>
+                        <button onclick="fetchIndustryIdeas('retail')"
+                            class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-green-500/50 hover:bg-green-500/5 dark:hover:bg-green-900/10 text-left transition-all w-full">
+                            <div
+                                class="flex items-center justify-center w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-[28px]">shopping_bag</span>
+                            </div>
+                            <div class="flex flex-col items-center md:items-start">
+                                <h3
+                                    class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-green-500 transition-colors">
+                                    E-commerce &amp; Retail</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">DTC, Marketplaces,
+                                    Shops</p>
+                            </div>
+                        </button>
+                        <button onclick="fetchIndustryIdeas('health')"
+                            class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-teal-500/50 hover:bg-teal-500/5 dark:hover:bg-teal-900/10 text-left transition-all w-full">
+                            <div
+                                class="flex items-center justify-center w-14 h-14 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-[28px]">cardiology</span>
+                            </div>
+                            <div class="flex flex-col items-center md:items-start">
+                                <h3
+                                    class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-teal-500 transition-colors">
+                                    Health &amp; Wellness</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">MedTech, Fitness,
+                                    Care</p>
+                            </div>
+                        </button>
+                        <button onclick="fetchIndustryIdeas('food')"
+                            class="industry-card group relative flex flex-col md:flex-row items-center gap-4 p-6 rounded-2xl border border-slate-200 dark:border-[#244732] bg-white dark:bg-[#1a2c22] hover:border-orange-500/50 hover:bg-orange-500/5 dark:hover:bg-orange-900/10 text-left transition-all w-full">
+                            <div
+                                class="flex items-center justify-center w-14 h-14 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-[28px]">restaurant</span>
+                            </div>
+                            <div class="flex flex-col items-center md:items-start">
+                                <h3
+                                    class="text-slate-900 dark:text-white text-lg font-bold group-hover:text-orange-500 transition-colors">
+                                    Food &amp; Hospitality</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm hidden md:block">Restaurants,
+                                    Travel, Events</p>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Input Section -->
+                    <div class="@container w-full">
+                        <div class="flex flex-col gap-6 items-center">
+                            <label class="text-slate-500 dark:text-[#93c8a8] text-lg font-medium" for="idea-input">Or,
+                                type your own idea below</label>
+                            <div class="relative w-full max-w-[720px] group/input">
+                                <div
+                                    class="absolute -inset-1 rounded-full bg-gradient-to-r from-primary/30 to-blue-500/30 blur opacity-25 group-focus-within/input:opacity-75 transition duration-500">
+                                </div>
+                                <div
+                                    class="relative flex w-full items-center rounded-full bg-white dark:bg-[#1a2c22] border border-slate-200 dark:border-[#346548] p-2 shadow-xl">
+                                    <div class="pl-4 text-slate-400 dark:text-[#5e8c72]">
+                                        <span class="material-symbols-outlined">auto_awesome</span>
+                                    </div>
+                                    <input
+                                        class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#5e8c72] text-lg px-4 py-3"
+                                        id="idea-input" placeholder="e.g., An Uber for dog walking in Mumbai..."
+                                        type="text" />
+                                    <button onclick="runSimulation()" id="simulate-btn"
+                                        class="hidden sm:flex items-center gap-2 bg-primary hover:bg-[#14d660] text-background-dark font-bold rounded-full px-8 py-3 transition-all hover:shadow-[0_0_20px_rgba(25,230,107,0.4)] cursor-pointer">
+                                        <span id="btn-text">Simulate</span>
+                                        <span id="btn-icon" class="material-symbols-outlined text-[20px]">bolt</span>
+                                        <div id="btn-loader" class="loader hidden"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter / Ideas Container -->
+                    <div class="flex flex-col items-center gap-4 pb-20">
+                        <h3 class="text-slate-400 dark:text-slate-500 text-sm font-semibold uppercase tracking-wider">
+                            Pick a starting idea</h3>
+                        <div id="ideas-container" class="flex flex-wrap justify-center gap-3">
+                            <!-- Populated dynamically -->
+                            <div class="text-slate-500 italic">Click an industry above to see ideas...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESULTS VIEW -->
+                <div id="results-view" class="hidden flex-col w-full max-w-[1100px] gap-8 fade-in">
+                    <!-- Top Summary & Scores -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Summary Card -->
+                        <div class="lg:col-span-2 p-8 rounded-2xl bg-card-dark border border border-slate-700/50">
+                            <h3 class="text-primary font-bold text-sm uppercase tracking-wider mb-3">Simulation Summary
+                            </h3>
+                            <p id="res-summary" class="text-xl text-white leading-relaxed font-light">
+                                <!-- Dynamic Summary -->
+                            </p>
+                            <div class="mt-6 flex flex-wrap gap-2" id="dna-tags">
+                                <!-- Tags -->
+                            </div>
+                        </div>
+
+                        <!-- North Star Card -->
+                        <div
+                            class="p-8 rounded-2xl bg-gradient-to-br from-blue-900/40 to-card-dark border border-blue-500/20 flex flex-col justify-center items-center text-center">
+                            <div class="text-blue-400 text-sm font-bold uppercase mb-2">North Star Metric</div>
+                            <h2 id="res-north-star" class="text-3xl font-black text-white mb-2"></h2>
+                            <div id="res-badge" class="px-3 py-1 bg-blue-500 text-black font-bold rounded-full text-xs">
+                            </div>
+                            <p id="res-justification" class="text-slate-400 text-xs mt-4"></p>
+                        </div>
+                    </div>
+
+                    <!-- Environmental Factors -->
+                    <!-- Environmental Factors Dashboard -->
+                    <div class="factors-dashboard">
+                        <h3 class="text-white font-bold mb-4">Environmental Factor Scores</h3>
+                        <div class="factors-grid" id="env-factors-dashboard-content">
+                            <!-- Populated JS -->
+                        </div>
+                    </div>
+
+                    <button class="text-xs text-slate-500 underline mb-4 text-center w-full"
+                        onclick="toggleGraphView()">Switch View (Graph/Table)</button>
+
+                    <div id="graph-view" class="w-full">
+                        <!-- Content below -->
+                    </div>
+
+                    <div id="table-view" class="hidden w-full bg-card-dark p-6 rounded-2xl border border-slate-700">
+                        <h3 class="text-white font-bold">Data Table View</h3>
+                        <table class="data-table" id="details-table">
+                            <!-- Populated JS -->
+                        </table>
+                    </div>
+
+
+                    <!-- Blocker & Mutations -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Blocker -->
+                        <!-- Blocker Redesigned -->
+                        <div class="blocker-card">
+                            <h3>#1 Blocker Identified</h3>
+                            <div class="blocker-type" id="blocker-type"></div>
+                            <div class="blocker-description" id="blocker-desc"></div>
+
+                            <div class="severity-display">
+                                <div class="severity-label">Severity: <span class="severity-score"
+                                        id="blocker-sev-score"></span></div>
+                                <div class="severity-visual">
+                                    <div class="severity-track">
+                                        <div class="severity-fill" id="blocker-sev-fill" style="width: 0%;"></div>
+                                    </div>
+                                    <div class="severity-legend">
+                                        <span>Low</span>
+                                        <span>Medium</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="impact-metrics">
+                                <div class="impact-item">
+                                    <span class="metric-label">Affected Users:</span>
+                                    <span class="metric-value" id="blocker-affected"></span>
+                                </div>
+                                <div class="impact-item">
+                                    <span class="metric-label">Revenue Impact:</span>
+                                    <span class="metric-value">High</span> <!-- Static for now or calculated -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recommendations -->
+                        <div class="flex flex-col gap-4">
+                            <!-- Urgent -->
+                            <div
+                                class="p-5 rounded-xl bg-orange-900/10 border border-orange-500/30 relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 right-0 px-2 py-1 bg-orange-500 text-black text-[10px] font-bold uppercase rounded-bl">
+                                    Urgent Action</div>
+                                <h4 class="text-orange-400 font-bold text-sm mb-1">Implement within 2 weeks</h4>
+                                <p id="urgent-desc" class="text-white text-lg font-medium mb-3"></p>
+                                <div class="flex gap-3 text-xs text-slate-400">
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-symbols-outlined text-[14px]">payments</span> <span
+                                            id="urgent-cost"></span></span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-symbols-outlined text-[14px]">trending_up</span> <span
+                                            id="urgent-impact"></span> Impact</span>
+                                </div>
+                            </div>
+                            <!-- Next Step -->
+                            <div
+                                class="p-5 rounded-xl bg-blue-900/10 border border-blue-500/30 relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 right-0 px-2 py-1 bg-blue-500 text-black text-[10px] font-bold uppercase rounded-bl">
+                                    Strategic Step</div>
+                                <h4 class="text-blue-400 font-bold text-sm mb-1">Next 1-3 Months</h4>
+                                <p id="next-desc" class="text-white text-lg font-medium mb-3"></p>
+                                <div class="flex gap-3 text-xs text-slate-400">
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-symbols-outlined text-[14px]">payments</span> <span
+                                            id="next-cost"></span></span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-symbols-outlined text-[14px]">trending_up</span> <span
+                                            id="next-impact"></span> Impact</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personas -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="persona-grid">
+                        <!-- Populated -->
+                    </div>
+
+                    <!-- Financials -->
+                    <!-- Revenue Projection Visualization -->
+                    <!-- Competitor Weakness Map -->
+                    <div class="comp-container p-6 rounded-2xl bg-card-dark border border-slate-700/50">
+                        <h3 class="text-white font-bold mb-4">Competitor Weakness Map</h3>
+
+                        <div class="strategy-row mb-6">
+                            <div class="strategy-box">
+                                <div class="strategy-title">Primary Attack Vector</div>
+                                <div id="attack-vector-disp" class="strategy-val text-sm"></div>
+                            </div>
+                            <div class="strategy-box">
+                                <div class="strategy-title">Market Share Potential</div>
+                                <div id="capture-disp" class="strategy-val text-2xl"></div>
+                            </div>
+                        </div>
+
+                        <div id="comp-grid-disp" class="comp-grid">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex flex-col items-center gap-4 pb-12">
+                        <div class="text-xs text-slate-500">Report ID: <span id="report-id-disp"></span></div>
+                        <div class="flex gap-4">
+                            <button onclick="downloadReport()"
+                                class="flex items-center gap-2 bg-white text-black hover:bg-slate-200 font-bold rounded-full px-6 py-3 transition-colors">
+                                <span class="material-symbols-outlined">download</span> Download Full Report
+                            </button>
+                            <button onclick="location.reload()"
+                                class="flex items-center gap-2 border border-slate-600 text-slate-400 hover:text-white hover:border-white font-bold rounded-full px-6 py-3 transition-colors">
+                                <span class="material-symbols-outlined">refresh</span> New Simulation
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        let currentReportId = null;
+
+        async function fetchIndustryIdeas(industryId) {
+            const container = document.getElementById('ideas-container');
+            container.innerHTML = '<div class="loader"></div>';
+
+            try {
+                const response = await fetch(`/api/industry-ideas/${industryId}`);
+                const data = await response.json();
+
+                container.innerHTML = '';
+                data.ideas.forEach(idea => {
+                    const btn = document.createElement('button');
+                    btn.className = "text-left p-3 rounded-xl border border-slate-200 dark:border-[#346548] bg-white dark:bg-[#1a2c22]/50 hover:bg-slate-50 dark:hover:bg-[#244732] text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors max-w-[200px]";
+                    btn.textContent = idea;
+                    btn.onclick = () => {
+                        document.getElementById('idea-input').value = idea;
+                        // Scroll to input
+                        document.getElementById('idea-input').scrollIntoView({ behavior: 'smooth' });
+                    };
+                    container.appendChild(btn);
+                });
+            } catch (error) {
+                container.innerHTML = '<div class="text-red-500">Failed to load ideas.</div>';
+            }
+        }
+
+        async function runSimulation() {
+            const input = document.getElementById('idea-input');
+            const idea = input.value.trim();
+            if (!idea) {
+                alert("Please enter an idea first.");
+                return;
+            }
+
+            // UI Loading State
+            const btn = document.getElementById('simulate-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const btnLoader = document.getElementById('btn-loader');
+
+            btnText.textContent = "Simulating...";
+            btnIcon.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/simulate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idea: idea })
+                });
+                const data = await response.json();
+
+                renderResults(data);
+
+                // Switch Views
+                document.getElementById('landing-view').classList.add('hidden');
+                document.getElementById('results-view').classList.remove('hidden');
+                document.getElementById('results-view').classList.add('flex'); // Enable flex layout
+                document.getElementById('result-header-content').classList.remove('hidden');
+
+            } catch (error) {
+                console.error(error);
+                alert("Simulation failed. Please try again.");
+                btnText.textContent = "Simulate";
+                btnIcon.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+                btn.disabled = false;
+            }
+        }
+
+        function toggleGraphView() {
+            const graphView = document.getElementById('graph-view');
+            const tableView = document.getElementById('table-view');
+
+            // Note: In my replacement HTML above, I wrapped the blocker/recommendations/personas in 'graph-view' implicitly?
+            // Wait, I inserted 'graph-view' div in Chunk 3, but didn't close it? 
+            // Need to be careful. The user structure implies wrapping.
+            // Let's implement simple check.
+
+            if (graphView.classList.contains('hidden')) {
+                graphView.classList.remove('hidden');
+                tableView.classList.add('hidden');
+            } else {
+                graphView.classList.add('hidden');
+                tableView.classList.remove('hidden');
+            }
+        }
+
+        function renderResults(data) {
+            currentReportId = data.report_id;
+
+            // Header
+            document.getElementById('header-north-star').textContent = data.north_star.metric;
+            document.getElementById('header-badge').textContent = `Level ${data.north_star.badge_level} Badge`;
+
+            // Summary
+            document.getElementById('res-summary').textContent = data.summary;
+            document.getElementById('dna-tags').innerHTML = `
+                <span class="px-2 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">${data.idea_dna.target_user}</span>
+                <span class="px-2 py-1 rounded bg-slate-800 text-slate-300 text-xs border border-slate-700">${data.idea_dna.domain}</span>
+            `;
+
+            // North Star
+            document.getElementById('res-north-star').textContent = data.north_star.metric;
+            document.getElementById('res-badge').textContent = `Level ${data.north_star.badge_level}`;
+            document.getElementById('res-justification').textContent = data.north_star.justification;
+
+            // Environmental Factors - NEW DASHBOARD
+            const envGrid = document.getElementById('env-factors-dashboard-content');
+            envGrid.innerHTML = '';
+
+            // Also populate Table
+            const table = document.getElementById('details-table');
+            table.innerHTML = '<tr><th>Factor</th><th>Score</th><th>Status</th></tr>';
+
+            const factors = [
+                { k: 'trust', l: 'Trust' }, { k: 'price_fit', l: 'Price Fit' },
+                { k: 'market_size', l: 'Market Size' }, { k: 'digital_literacy', l: 'Digital Literacy' },
+                { k: 'competition', l: 'Competition' }, { k: 'infrastructure', l: 'Infrastructure' }
+            ];
+
+            factors.forEach(f => {
+                const val = data.environmental_factors[f.k] || 0;
+                // Dashboard Item
+                const div = document.createElement('div');
+                div.className = "factor-item";
+                div.innerHTML = `
+                    <div class="factor-name">${f.l}</div>
+                    <div class="factor-score">${val}/100</div>
+                    <div class="factor-bar">
+                        <div class="factor-fill" style="width: ${val}%"></div>
+                    </div>
+                `;
+                envGrid.appendChild(div);
+
+                // Table Row
+                const row = `<tr><td>${f.l}</td><td>${val}/100</td><td>${val > 70 ? 'Good' : (val < 40 ? 'Risk' : 'Neutral')}</td></tr>`;
+                table.innerHTML += row;
+            });
+
+            // Blocker Redesigned
+            const blocker = data.blocker_analysis.primary_blocker;
+            document.getElementById('blocker-type').textContent = blocker.type;
+            document.getElementById('blocker-desc').textContent = blocker.description;
+            document.getElementById('blocker-sev-score').textContent = `${blocker.severity}/10`;
+
+            // FIX: GLITCH FIX (Multiplier * 10, not 100)
+            // Ensure width doesn't exceed 100%
+            const sevPct = Math.min(blocker.severity * 10, 100);
+            document.getElementById('blocker-sev-fill').style.width = `${sevPct}%`;
+
+            document.getElementById('blocker-affected').textContent = `${blocker.affected_percent}%`;
+
+            // Table Row for Blocker
+            table.innerHTML += `<tr><td><strong>Primary Blocker</strong></td><td>${blocker.severity}/10</td><td>${blocker.type}</td></tr>`;
+
+            // Actions
+            document.getElementById('urgent-desc').textContent = data.urgent_action.description;
+            document.getElementById('urgent-cost').textContent = `₹${data.urgent_action.cost_inr.toLocaleString('en-IN')}`;
+            document.getElementById('urgent-impact').textContent = `${data.urgent_action.impact_percent}%`;
+
+            document.getElementById('next-desc').textContent = data.next_step.description;
+            document.getElementById('next-cost').textContent = `₹${data.next_step.cost_inr.toLocaleString('en-IN')}`;
+            document.getElementById('next-impact').textContent = `${data.next_step.impact_percent}%`;
+
+            // Personas (Keep existing grid)
+            const pGrid = document.getElementById('persona-grid');
+            pGrid.innerHTML = '';
+            data.persona_snapshots.forEach(p => {
+                const pEl = document.createElement('div');
+                pEl.className = "p-4 rounded-xl bg-card-dark border border-slate-700/50";
+                pEl.innerHTML = `
+                    <div class="text-xs text-slate-500 uppercase mb-1">${p.type}</div>
+                    <div class="text-white font-bold text-lg mb-2">${p.name}</div>
+                    <div class="text-slate-400 text-sm mb-2">Goal: ${p.goal}</div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-full bg-slate-800 h-1 rounded-full">
+                            <div class="bg-blue-500 h-1 rounded-full" style="width: ${p.adoption_likelihood}%"></div>
+                        </div>
+                    </div>
+                `;
+                pGrid.appendChild(pEl);
+            });
+
+            // Competitor Map
+            const compMap = data.competitor_map;
+            document.getElementById('attack-vector-disp').textContent = compMap.primary_attack_vector;
+            document.getElementById('capture-disp').textContent = `${compMap.market_share_potential}%`;
+
+            const compGrid = document.getElementById('comp-grid-disp');
+            compGrid.innerHTML = '';
+
+            compMap.competitors.forEach(c => {
+                const card = document.createElement('div');
+                card.className = "comp-card";
+
+                // Generate Weakness Bars
+                let bars = '';
+                for (const [wKey, wObj] of Object.entries(c.details)) {
+                    bars += `
+                        <div class="weakness-row">
+                            <span>${wKey.toUpperCase()}</span>
+                            <div class="flex items-center gap-2">
+                                <div class="weakness-track"><div class="weakness-val" style="width: ${wObj.score * 10}%"></div></div>
+                                <span>${wObj.score}</span>
+                            </div>
+                        </div>
+                     `;
+                }
+
+                card.innerHTML = `
+                    <div class="comp-name">${c.name}</div>
+                    <div class="text-xs text-slate-400 mb-2">Exploitability: ${c.exploitability}</div>
+                    <div class="flex flex-col gap-1">
+                        ${bars}
+                    </div>
+                 `;
+                compGrid.appendChild(card);
+            });
+
+            document.getElementById('report-id-disp').textContent = data.report_id;
+        }
+
+        async function downloadReport() {
+            if (!currentReportId) return;
+            try {
+                const response = await fetch('/api/download-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ report_id: currentReportId })
+                });
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Business_Report_${currentReportId}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                } else {
+                    alert("Download failed.");
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Download error.");
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,392 @@
+{
+    "tech_saas": [
+        {
+            "name": "Zoho",
+            "weaknesses": {
+                "pricing": {
+                    "score": 2,
+                    "desc": "Very affordable, hard to undercut"
+                },
+                "features": {
+                    "score": 3,
+                    "desc": "Feature bloat, steep learning curve"
+                },
+                "ux": {
+                    "score": 7,
+                    "desc": "Dated interface, complex navigation"
+                },
+                "coverage": {
+                    "score": 4,
+                    "desc": "Global focus, less localized for niche Indian SMEs"
+                }
+            }
+        },
+        {
+            "name": "Freshworks",
+            "weaknesses": {
+                "pricing": {
+                    "score": 4,
+                    "desc": "Mid-market pricing, gap for micro-SaaS"
+                },
+                "features": {
+                    "score": 3,
+                    "desc": "Good geneal coverage, lacks vertical specificity"
+                },
+                "ux": {
+                    "score": 3,
+                    "desc": "Generally good, some friction in advanced configurations"
+                },
+                "coverage": {
+                    "score": 5,
+                    "desc": "Focus on enterprise, leaves freelancers underserved"
+                }
+            }
+        },
+        {
+            "name": "Tally",
+            "weaknesses": {
+                "pricing": {
+                    "score": 5,
+                    "desc": "One-time cost high for very small vendors"
+                },
+                "features": {
+                    "score": 8,
+                    "desc": "Lacks modern cloud collaboration features"
+                },
+                "ux": {
+                    "score": 9,
+                    "desc": "Legacy command-line style interface, hard for GenZ"
+                },
+                "coverage": {
+                    "score": 2,
+                    "desc": "Dominates accounting, weak in broader ERP/CRM"
+                }
+            }
+        }
+    ],
+    "food_hospitality": [
+        {
+            "name": "Zomato",
+            "weaknesses": {
+                "pricing": {
+                    "score": 8,
+                    "desc": "High commissions squeeze restaurant margins"
+                },
+                "features": {
+                    "score": 2,
+                    "desc": "Robust app, hard to find technical gaps"
+                },
+                "ux": {
+                    "score": 2,
+                    "desc": "Addictive UX, very low friction"
+                },
+                "coverage": {
+                    "score": 6,
+                    "desc": "Tier 2/3 city penetration still has gaps vs Tier 1"
+                }
+            }
+        },
+        {
+            "name": "Swiggy",
+            "weaknesses": {
+                "pricing": {
+                    "score": 8,
+                    "desc": "High delivery fees and surge pricing irritate users"
+                },
+                "features": {
+                    "score": 3,
+                    "desc": "Strong logistics, but limited social/community features"
+                },
+                "ux": {
+                    "score": 2,
+                    "desc": "Very smooth, Instamart is a strong moat"
+                },
+                "coverage": {
+                    "score": 5,
+                    "desc": "Hyperlocal limitations in outer suburbs"
+                }
+            }
+        },
+        {
+            "name": "Oyo",
+            "weaknesses": {
+                "pricing": {
+                    "score": 3,
+                    "desc": "Dynamic pricing can sometimes feel opaque"
+                },
+                "features": {
+                    "score": 6,
+                    "desc": "Inconsistent amenity mapping (wifi often missing)"
+                },
+                "ux": {
+                    "score": 5,
+                    "desc": "Booking is easy, post-booking support is high friction"
+                },
+                "coverage": {
+                    "score": 4,
+                    "desc": "Strong budget presence, weak premium trust"
+                }
+            }
+        }
+    ],
+    "edtech": [
+        {
+            "name": "Byju's",
+            "weaknesses": {
+                "pricing": {
+                    "score": 9,
+                    "desc": "Extremely expensive multi-year lock-ins"
+                },
+                "features": {
+                    "score": 4,
+                    "desc": "Content is good but lacks personalized mentorship"
+                },
+                "ux": {
+                    "score": 6,
+                    "desc": "Pushy sales-driven aggressive funnel"
+                },
+                "coverage": {
+                    "score": 5,
+                    "desc": "Focus on K-12, gaps in vocational/adult learning"
+                }
+            }
+        },
+        {
+            "name": "Unacademy",
+            "weaknesses": {
+                "pricing": {
+                    "score": 6,
+                    "desc": "Subscription model can be pricey for casual learners"
+                },
+                "features": {
+                    "score": 5,
+                    "desc": "Live class reliance, recording archives can be messy"
+                },
+                "ux": {
+                    "score": 4,
+                    "desc": "Cluttered with too many educators/courses"
+                },
+                "coverage": {
+                    "score": 3,
+                    "desc": "Strong in test prep, weak in hobby/creative skills"
+                }
+            }
+        },
+        {
+            "name": "Udemy",
+            "weaknesses": {
+                "pricing": {
+                    "score": 1,
+                    "desc": "Flash sales make it very cheap"
+                },
+                "features": {
+                    "score": 7,
+                    "desc": "Quality control is variable, no live interaction"
+                },
+                "ux": {
+                    "score": 3,
+                    "desc": "Standard LMS, nothing revolutionary"
+                },
+                "coverage": {
+                    "score": 4,
+                    "desc": "Global content, lack of vernacular Indian languages"
+                }
+            }
+        }
+    ],
+    "fintech": [
+        {
+            "name": "Paytm",
+            "weaknesses": {
+                "pricing": {
+                    "score": 2,
+                    "desc": "Low cost/free for users"
+                },
+                "features": {
+                    "score": 8,
+                    "desc": "Superapp bloat, too many features confuse focus"
+                },
+                "ux": {
+                    "score": 7,
+                    "desc": "Cluttered interface, hard to navigate"
+                },
+                "coverage": {
+                    "score": 3,
+                    "desc": "Ubiquitous, hard to find coverage gaps"
+                }
+            }
+        },
+        {
+            "name": "Zerodha",
+            "weaknesses": {
+                "pricing": {
+                    "score": 1,
+                    "desc": "Industry standard low fees"
+                },
+                "features": {
+                    "score": 6,
+                    "desc": "Technical glitches during high volatility"
+                },
+                "ux": {
+                    "score": 5,
+                    "desc": "Kite is clean but complex for absolute beginners"
+                },
+                "coverage": {
+                    "score": 4,
+                    "desc": "Stock focus, weaker in automated advisory/wealth mgmt"
+                }
+            }
+        },
+        {
+            "name": "PhonePe",
+            "weaknesses": {
+                "pricing": {
+                    "score": 2,
+                    "desc": "Free UPI dominates"
+                },
+                "features": {
+                    "score": 4,
+                    "desc": "Solid payments, limited investment depth vs dedicated apps"
+                },
+                "ux": {
+                    "score": 2,
+                    "desc": "Clean and fast"
+                },
+                "coverage": {
+                    "score": 3,
+                    "desc": "Massive reach, hard to beat on distribution"
+                }
+            }
+        }
+    ],
+    "health_wellness": [
+        {
+            "name": "Practo",
+            "weaknesses": {
+                "pricing": {
+                    "score": 5,
+                    "desc": "Consultation fees can vary wildly"
+                },
+                "features": {
+                    "score": 6,
+                    "desc": "Booking is fine, post-care follow-up features weak"
+                },
+                "ux": {
+                    "score": 4,
+                    "desc": "Functional but clinical"
+                },
+                "coverage": {
+                    "score": 5,
+                    "desc": "Metro centric, Tier 2/3 doctors often missing"
+                }
+            }
+        },
+        {
+            "name": "Cult.fit",
+            "weaknesses": {
+                "pricing": {
+                    "score": 7,
+                    "desc": "Premium pricing, expensive for average Indian"
+                },
+                "features": {
+                    "score": 4,
+                    "desc": "Group class focus, lacks personalized coaching depth"
+                },
+                "ux": {
+                    "score": 2,
+                    "desc": "Slick app experience"
+                },
+                "coverage": {
+                    "score": 6,
+                    "desc": "Physical centers only in top metros"
+                }
+            }
+        },
+        {
+            "name": "1mg",
+            "weaknesses": {
+                "pricing": {
+                    "score": 3,
+                    "desc": "Good discounts"
+                },
+                "features": {
+                    "score": 5,
+                    "desc": "Diagnostics and pharmacy decoupled sometimes"
+                },
+                "ux": {
+                    "score": 4,
+                    "desc": "E-commerce style, functional"
+                },
+                "coverage": {
+                    "score": 4,
+                    "desc": "Delivery times in non-metros can be slow"
+                }
+            }
+        }
+    ],
+    "retail_ecommerce": [
+        {
+            "name": "Amazon",
+            "weaknesses": {
+                "pricing": {
+                    "score": 2,
+                    "desc": "Economies of scale make them cheapest"
+                },
+                "features": {
+                    "score": 3,
+                    "desc": "Everything store, lacks discovery for niche artisanal goods"
+                },
+                "ux": {
+                    "score": 6,
+                    "desc": "Functional but ugly, cluttered search results"
+                },
+                "coverage": {
+                    "score": 1,
+                    "desc": "Everywhere"
+                }
+            }
+        },
+        {
+            "name": "Flipkart",
+            "weaknesses": {
+                "pricing": {
+                    "score": 2,
+                    "desc": "Competitive discounts"
+                },
+                "features": {
+                    "score": 4,
+                    "desc": "Grocery integration still clunky"
+                },
+                "ux": {
+                    "score": 5,
+                    "desc": "Mobile first, but banner blindness is real"
+                },
+                "coverage": {
+                    "score": 2,
+                    "desc": "Strong delivery network"
+                }
+            }
+        },
+        {
+            "name": "Myntra",
+            "weaknesses": {
+                "pricing": {
+                    "score": 5,
+                    "desc": "Mid-premium focus"
+                },
+                "features": {
+                    "score": 3,
+                    "desc": "Good fashion features, lacks sustainable/thrift options"
+                },
+                "ux": {
+                    "score": 2,
+                    "desc": "Visual and appealing"
+                },
+                "coverage": {
+                    "score": 3,
+                    "desc": "Fashion focused only"
+                }
+            }
+        }
+    ]
+}

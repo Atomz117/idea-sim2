@@ -1,0 +1,50 @@
+{
+    "Trust Collisions": {
+        "urgent": [
+            "Implement a transparent 'Try Before You Buy' flow to demonstrate value upfront.",
+            "Add social proof elements (fake 'Recent Signups' or testimonials structure) to the landing page.",
+            "Display clear 'No Credit Card Required' badges prominently."
+        ],
+        "next_step": [
+            "Partner with a recognized industry body for certification.",
+            "Integrate RBI-approved escrow payment systems.",
+            "Build a community forum for peer-to-peer trust validation."
+        ]
+    },
+    "Adoption Friction": {
+        "urgent": [
+            "Simplify the onboarding process to maximum 3 clicks.",
+            "Add a guided tooltip tour for the first-time user experience.",
+            "Enable 'Login with WhatsApp' for faster entry."
+        ],
+        "next_step": [
+            "Develop a proprietary 'One-Touch' integration module.",
+            "Create localised vernacular language support (Hindi, Tamil, etc.).",
+            "Launch a 24/7 AI chatbot concierge for onboarding support."
+        ]
+    },
+    "Price Misfits": {
+        "urgent": [
+            "Introduce a 'Lite' tier with restricted features at 40% cost.",
+            "Offer a limited-time 'Early Bird' discount of 20%.",
+            "Bundle services to increase perceived value without dropping price."
+        ],
+        "next_step": [
+            "Switch to a Freemium model with ad-supported basic access.",
+            "Implement Micro-Transaction models (Pay-per-use).",
+            "Partner with financing apps (BNPL) to offer installment options."
+        ]
+    },
+    "Timing Misfires": {
+        "urgent": [
+            "Create an 'Alert Me Later' waitlist with incentive.",
+            " pivot messaging to highlight immediate pain-point relief.",
+            "Run retargeting campaigns focused on specific trigger events."
+        ],
+        "next_step": [
+            "Develop a seasonal marketing calendar aligned with market cycles.",
+            "Build an educational content hub to nurture long-term leads.",
+            "Diversify use-cases to include non-seasonal needs."
+        ]
+    }
+}

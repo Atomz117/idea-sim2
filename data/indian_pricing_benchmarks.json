@@ -1,0 +1,46 @@
+{
+    "B2C": {
+        "SaaS": {
+            "low": 199,
+            "high": 999,
+            "description": "Subscription for consumer apps (Spotify/Netflix range)"
+        },
+        "Transaction": {
+            "low": 300,
+            "high": 800,
+            "description": "Food delivery / small e-comm order value"
+        },
+        "Marketplace": {
+            "low": 500,
+            "high": 2500,
+            "description": "Average order value for fashion/electronics"
+        },
+        "Service": {
+            "low": 200,
+            "high": 1000,
+            "description": "One-time service fee (Urban Company style)"
+        }
+    },
+    "B2B": {
+        "SaaS": {
+            "low": 1499,
+            "high": 9999,
+            "description": "SME subscription tools (Zoho/Freshworks range)"
+        },
+        "Enterprise": {
+            "low": 25000,
+            "high": 150000,
+            "description": "Large scale enterprise contracts (per month equiv)"
+        },
+        "Marketplace": {
+            "low": 10000,
+            "high": 50000,
+            "description": "Wholesale trade or bulk order values"
+        }
+    },
+    "Commissions": {
+        "Standard": 0.15,
+        "High": 0.25,
+        "Low": 0.05
+    }
+}
