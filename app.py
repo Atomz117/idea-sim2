@@ -71,8 +71,13 @@ def simulate():
     
     time.sleep(2) # Backend processing time
     
-    result = engine.run_simulation(idea_text)
-    return jsonify(result)
+    try:
+        result = engine.run_simulation(idea_text)
+        return jsonify(result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e), "trace": traceback.format_exc()}), 500
 
 @app.route('/api/download-report', methods=['POST'])
 def download_report():

@@ -778,7 +778,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ idea: idea })
                 });
+
                 const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Server simulation failed");
+                }
 
                 renderResults(data);
 
@@ -790,7 +795,7 @@
 
             } catch (error) {
                 console.error(error);
-                alert("Simulation failed. Please try again.");
+                alert("Simulation Failed: " + error.message);
                 btnText.textContent = "Simulate";
                 btnIcon.classList.remove('hidden');
                 btnLoader.classList.add('hidden');

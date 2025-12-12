@@ -44,7 +44,9 @@ class SimulationEngine:
             with open(os.path.join(self.data_path, 'competitor_database.json')) as f:
                 self.competitors_db = json.load(f)
         except Exception as e:
-            print(f"Error loading knowledge base: {e}")
+            print(f"CRITICAL ERROR in load_knowledge_base: {e}")
+            import traceback
+            traceback.print_exc()
             self.income_caps = {"middle_class": 800} 
             self.competitors_db = {}
 
@@ -211,8 +213,25 @@ class SimulationEngine:
         db_key = domain_map.get(dna['domain'], "tech_saas")
         competitors = self.competitors_db.get(db_key, self.competitors_db.get("tech_saas"))
         
+        # Fallback if still None or empty
+        if not competitors:
+            print(f"WARNING: No competitors found for {dna['domain']} (mapped to {db_key}). check competitor_database.json")
+            competitors = []
+
         # Select 3 relevant
-        selected = competitors[:3]
+        selected = competitors[:3] if competitors else []
+        
+        # Create a dummy competitor if absolutely nothing exists to prevent crash
+        if not selected:
+             selected = [{
+                 "name": "Generic Incumbent",
+                 "weaknesses": {
+                     "pricing": {"score": 5, "desc": "Standard market pricing"},
+                     "features": {"score": 5, "desc": "Standard feature set"},
+                     "ux": {"score": 5, "desc": "Average UX"},
+                     "coverage": {"score": 5, "desc": "Average coverage"}
+                 }
+             }]
         
         # Analyze Weaknesses
         total_exploitable_score = 0
